@@ -1,3 +1,4 @@
 [submodule "l"]
 	path = l
 	url = https://github.com/zarazaex69/l
+	branch = main

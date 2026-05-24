@@ -5,16 +5,8 @@ set THEME "gruvbox"
 set -l SCRIPT_DIR (dirname (status --current-filename))
 
 if test -f $SCRIPT_DIR/.gitmodules
-    set -l need_init 0
-    for sm_path in (git -C $SCRIPT_DIR config --file .gitmodules --get-regexp path | awk '{print $2}')
-        if not test -f $SCRIPT_DIR/$sm_path/.git; and not test -d $SCRIPT_DIR/$sm_path/.git
-            set need_init 1
-            break
-        end
-    end
-    if test $need_init -eq 1
-        git -C $SCRIPT_DIR submodule update --init --recursive
-    end
+    git -C $SCRIPT_DIR submodule sync --recursive
+    git -C $SCRIPT_DIR submodule update --init --recursive --remote --merge
 end
 
 function print_step
